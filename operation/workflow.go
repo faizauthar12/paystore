@@ -2,13 +2,14 @@ package operation
 
 import (
 	"database/sql"
-	"github.com/redis/go-redis/v9"
 	"paystore/config"
 	"paystore/lib/balance"
 	"paystore/lib/organization"
 	"paystore/lib/payment"
 	"paystore/lib/transaction"
 	"paystore/lib/withdraw"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type OrganizationClient struct {
@@ -22,6 +23,20 @@ type PaystoreClient struct {
 	transactionRepository  transaction.RepositoryClient
 	organizationRepository organization.RepositoryClient
 	withdrawRepository     withdraw.RepositoryClient
+}
+
+func (ps *PaystoreClient) CreateOrganization(name, slug string) (*organization.Organization, error) {
+
+	newOrganization := organization.NewOrganization()
+	newOrganization.Name = name
+	newOrganization.Slug = slug
+
+	err := ps.organizationRepository.Create(newOrganization)
+	if err != nil {
+		return nil, err
+	}
+
+	return newOrganization, nil
 }
 
 func (ps *PaystoreClient) CreateBalance(externalID string,
