@@ -1,4 +1,4 @@
-module paystore
+module github.com/faizauthar12/paystore
 
 go 1.24.0
 
