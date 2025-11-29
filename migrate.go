@@ -18,8 +18,8 @@ var createTableBalance = `
     );
 
     -- Indexes for better query performance
-    CREATE INDEX idx_accounts_organization_uuid (organization_uuid);
-    CREATE INDEX idx_accounts_external_id (external_id);
+    CREATE INDEX idx_accounts_organization_uuid ON balance (organization_uuid);
+    CREATE INDEX idx_accounts_external_id ON balance (external_id);
 `
 
 var createTableQuery = `

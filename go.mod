@@ -8,6 +8,7 @@ require (
 	github.com/21strive/item v0.2.0
 	github.com/21strive/redifu v0.13.1
 	github.com/gofiber/fiber/v2 v2.52.9
+	github.com/lib/pq v1.10.9
 	github.com/redis/go-redis/v9 v9.7.0
 	golang.org/x/crypto v0.43.0
 	google.golang.org/grpc v1.76.0
@@ -20,7 +21,6 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/klauspost/compress v1.17.9 // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
