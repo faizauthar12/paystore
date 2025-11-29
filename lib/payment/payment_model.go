@@ -4,11 +4,12 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
-	"github.com/21strive/redifu"
-	"paystore/lib/balance"
-	"paystore/lib/organization"
-	"paystore/user"
 	"time"
+
+	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/organization"
+	"github.com/faizauthar12/paystore/user"
 )
 
 type Payment struct {

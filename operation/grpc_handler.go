@@ -2,10 +2,11 @@ package operation
 
 import (
 	"context"
-	"paystore/lib/organization"
-	"paystore/lib/payment"
-	"paystore/lib/withdraw"
-	pb "paystore/protos"
+
+	"github.com/faizauthar12/paystore/lib/organization"
+	"github.com/faizauthar12/paystore/lib/payment"
+	"github.com/faizauthar12/paystore/lib/withdraw"
+	pb "github.com/faizauthar12/paystore/protos"
 )
 
 // GRPCHandler

@@ -2,14 +2,15 @@ package payment
 
 import (
 	"database/sql"
+
 	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/builder"
+	"github.com/faizauthar12/paystore/lib/organization"
+	"github.com/faizauthar12/paystore/lib/transaction"
+	vendorModel "github.com/faizauthar12/paystore/user"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
-	"paystore/lib/balance"
-	"paystore/lib/builder"
-	"paystore/lib/organization"
-	"paystore/lib/transaction"
-	vendorModel "paystore/user"
 )
 
 var firstPartSelectQuery = `SELECT p.uuid, p.randid, p.created_at, p.updated_at, p.amount, p.balance_before_payment, p.balance_after_payment, p.balance_uuid, p.organization_uuid, p.hash`
@@ -78,7 +79,7 @@ func (br *Repository) Create(tx *sql.Tx, payment *Payment, balance *balance.Bala
 }
 
 func (br *Repository) Update(tx *sql.Tx, payment *Payment) error {
-	query := `UPDATE payment SET updated_at = $1, organization_uuid = $2, 
+	query := `UPDATE payment SET updated_at = $1, organization_uuid = $2,
                    vendor_record_id = $3, status = $4, hash = $5 WHERE uuid = $6`
 	_, errExec := tx.Exec(query, payment.GetUpdatedAt(), payment.OrganizationUUID, payment.VendorRecordID,
 		payment.Status, payment.Hash, payment.GetUUID())

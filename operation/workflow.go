@@ -2,12 +2,13 @@ package operation
 
 import (
 	"database/sql"
-	"paystore/config"
-	"paystore/lib/balance"
-	"paystore/lib/organization"
-	"paystore/lib/payment"
-	"paystore/lib/transaction"
-	"paystore/lib/withdraw"
+
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/organization"
+	"github.com/faizauthar12/paystore/lib/payment"
+	"github.com/faizauthar12/paystore/lib/transaction"
+	"github.com/faizauthar12/paystore/lib/withdraw"
 
 	"github.com/redis/go-redis/v9"
 )

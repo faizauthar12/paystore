@@ -1,9 +1,10 @@
 package user
 
 import (
-	"github.com/21strive/redifu"
-	"paystore/lib/helper"
 	"time"
+
+	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/lib/helper"
 )
 
 type PaymentVendor struct {

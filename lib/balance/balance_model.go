@@ -1,9 +1,10 @@
 package balance
 
 import (
-	"github.com/21strive/redifu"
-	"paystore/lib/organization"
 	"time"
+
+	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/lib/organization"
 )
 
 type Balance struct {

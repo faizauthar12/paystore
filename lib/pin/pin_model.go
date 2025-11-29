@@ -5,10 +5,11 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"fmt"
-	"github.com/21strive/redifu"
-	"golang.org/x/crypto/argon2"
-	"paystore/lib/balance"
 	"strings"
+
+	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"golang.org/x/crypto/argon2"
 )
 
 type Pin struct {

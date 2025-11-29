@@ -2,7 +2,7 @@ package transaction
 
 import (
 	"github.com/21strive/redifu"
-	"paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/balance"
 )
 
 type CommonTransaction interface {

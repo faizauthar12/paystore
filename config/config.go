@@ -1,9 +1,10 @@
 package config
 
 import (
-	"paystore/lib/helper"
-	"paystore/user"
 	"time"
+
+	"github.com/faizauthar12/paystore/lib/helper"
+	"github.com/faizauthar12/paystore/user"
 )
 
 type App struct {

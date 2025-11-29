@@ -2,13 +2,14 @@ package organization
 
 import (
 	"database/sql"
+
 	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/config"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
 )
 
 var createOrganizationQuery = `
-	INSERT INTO organization (uuid, randid, created_at, updated_at, name, slug, fees_constant, fees_type) 
+	INSERT INTO organization (uuid, randid, created_at, updated_at, name, slug, fees_constant, fees_type)
 	VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 var updateOrganizationQuery = `UPDATE organization SET name = $1, slug = $2 WHERE uuid = $3`
 var findOrganizationByUUIDQuery = `SELECT * FROM organization WHERE uuid = $1`

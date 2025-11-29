@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/gofiber/fiber/v2"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 	"os"
-	"paystore/config"
-	"paystore/lib/helper"
-	"paystore/operation"
-	pb "paystore/protos"
+
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/helper"
+	"github.com/faizauthar12/paystore/operation"
+	pb "github.com/faizauthar12/paystore/protos"
+	"github.com/gofiber/fiber/v2"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	_ "github.com/lib/pq"
 )

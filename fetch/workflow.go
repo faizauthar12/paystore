@@ -1,9 +1,9 @@
 package fetch
 
 import (
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/payment"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
-	"paystore/lib/payment"
 )
 
 type PaystoreFetcher struct {

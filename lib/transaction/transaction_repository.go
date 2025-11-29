@@ -2,9 +2,10 @@ package transaction
 
 import (
 	"database/sql"
+
 	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/config"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
 )
 
 type RepositoryClient interface {

@@ -2,14 +2,15 @@ package withdraw
 
 import (
 	"database/sql"
+
 	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/builder"
+	"github.com/faizauthar12/paystore/lib/organization"
+	"github.com/faizauthar12/paystore/lib/transaction"
+	vendorModel "github.com/faizauthar12/paystore/user"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
-	"paystore/lib/balance"
-	"paystore/lib/builder"
-	"paystore/lib/organization"
-	"paystore/lib/transaction"
-	vendorModel "paystore/user"
 )
 
 var firstPartSelectQuery = `SELECT w.uuid, w.randid, w.created_at, w.updated_at, w.amount, w.balance_before_withdraw, w.balance_after_withdraw, w.balance_uuid, w.organization_uuid, w.vendor_record_id, w.status, w.hash`
@@ -37,8 +38,8 @@ func (r *Repository) Close() {
 func (r *Repository) Create(tx *sql.Tx, withdraw *Withdraw, balance *balance.Balance,
 	organization *organization.Organization) error {
 	query := `
-		INSERT INTO withdraw (uuid, randid, created_at, updated_at, amount, balance_before_payment, 
-		balance_after_payment, balance_uuid, organization_uuid, vendor_record_id, status, hash) 
+		INSERT INTO withdraw (uuid, randid, created_at, updated_at, amount, balance_before_payment,
+		balance_after_payment, balance_uuid, organization_uuid, vendor_record_id, status, hash)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := tx.Exec(query, withdraw.GetUUID(), withdraw.GetRandId(), withdraw.GetCreatedAt(),

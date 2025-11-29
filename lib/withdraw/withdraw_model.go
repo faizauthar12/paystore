@@ -1,10 +1,11 @@
 package withdraw
 
 import (
-	"github.com/21strive/redifu"
-	"paystore/lib/balance"
-	"paystore/lib/organization"
 	"time"
+
+	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/lib/balance"
+	"github.com/faizauthar12/paystore/lib/organization"
 )
 
 type Withdraw struct {

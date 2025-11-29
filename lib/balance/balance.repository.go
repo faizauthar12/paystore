@@ -2,18 +2,19 @@ package balance
 
 import (
 	"database/sql"
+
 	"github.com/21strive/redifu"
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/organization"
 	"github.com/redis/go-redis/v9"
-	"paystore/config"
-	"paystore/lib/organization"
 )
 
 var findByUUIDQuery = `SELECT * FROM balance WHERE uuid = $1;`
 var findByExternalIDQuery = `SELECT * FROM balance WHERE external_id = $1;`
-var createBalanceQuery = `INSERT INTO balance 
+var createBalanceQuery = `INSERT INTO balance
     (
-     uuid, randid, created_at, updated_at, balance, 
-     last_receive, last_withdraw, income_accumulation, withdraw_accumulation, 
+     uuid, randid, created_at, updated_at, balance,
+     last_receive, last_withdraw, income_accumulation, withdraw_accumulation,
      currency, active, external_id, organization_uuid
 	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`
 
@@ -54,8 +55,8 @@ func (br *Repository) Create(balance *Balance) (err error) {
 }
 
 func (br *Repository) Update(tx *sql.Tx, balance *Balance) (err error) {
-	query := `UPDATE balance SET 
-		updated_at = $1, balance = $2, last_receive = $3, last_withdraw = $4, income_accumulation = $5, 
+	query := `UPDATE balance SET
+		updated_at = $1, balance = $2, last_receive = $3, last_withdraw = $4, income_accumulation = $5,
 		withdraw_accumulation = $6, currency = $7, active = $8, external_id = $9, organization_uuid = $10
 		WHERE uuid = $11`
 
@@ -100,8 +101,8 @@ func (br *Repository) FindByExternalID(externalID string) (*Balance, error) {
 }
 
 func (br *Repository) SeedPartial(subtraction int64, lastRandId string, organization organization.Organization) error {
-	baseQuery := `SELECT 
-    	uuid, randid, created_at, updated_at, balance, last_receive, last_withdraw, income_accumulation, 
+	baseQuery := `SELECT
+    	uuid, randid, created_at, updated_at, balance, last_receive, last_withdraw, income_accumulation,
     	withdraw_accumulation, currency, active, external_id, organization_uuid FROM balance`
 
 	rowQuery := baseQuery + ` WHERE randid = $1`

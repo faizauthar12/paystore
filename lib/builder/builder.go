@@ -1,8 +1,8 @@
 package builder
 
 import (
-	"paystore/config"
-	"paystore/lib/transaction"
+	"github.com/faizauthar12/paystore/config"
+	"github.com/faizauthar12/paystore/lib/transaction"
 )
 
 func JoinBuilder(firstPartSelectQuery string, transcationType transaction.TransactionType, config *config.App) string {
