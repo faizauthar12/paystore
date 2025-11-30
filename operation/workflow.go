@@ -29,10 +29,22 @@ type PaystoreClient struct {
 func (ps *PaystoreClient) CreateOrganization(name, slug string) (*organization.Organization, error) {
 
 	newOrganization := organization.NewOrganization()
+
+	// find if organization with the same slug already exists
+	// if exists, return it
+	newOrganization, err := ps.organizationRepository.FindBySlug(newOrganization.Slug)
+	if err == nil && newOrganization != nil {
+		return newOrganization, nil
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
 	newOrganization.Name = name
 	newOrganization.Slug = slug
 
-	err := ps.organizationRepository.Create(newOrganization)
+	err = ps.organizationRepository.Create(newOrganization)
 	if err != nil {
 		return nil, err
 	}
