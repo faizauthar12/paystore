@@ -36,9 +36,16 @@ type Repository struct {
 }
 
 func (or *Repository) Create(organization *Organization) error {
-	_, err := or.createOrganizationStmt.Exec(organization.GetUUID(),
-		organization.GetRandId(), organization.GetCreatedAt(), organization.GetUUID(),
-		organization.Name, organization.Slug, organization.FeesConstant, organization.FeesType)
+	_, err := or.createOrganizationStmt.Exec(
+		organization.GetUUID(),
+		organization.GetRandId(),
+		organization.GetCreatedAt(),
+		organization.GetUpdatedAt(),
+		organization.Name,
+		organization.Slug,
+		organization.FeesConstant,
+		organization.FeesType,
+	)
 	return err
 }
 
@@ -69,7 +76,7 @@ func (or *Repository) FindBySlug(slug string) (*Organization, error) {
 		if errScan == sql.ErrNoRows {
 			return nil, OrganizationNotFound
 		}
-		
+
 		return nil, errScan
 	}
 
