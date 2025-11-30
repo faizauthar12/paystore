@@ -1,7 +1,9 @@
 package main
 
+import "database/sql"
+
 var createTableBalance = `
-	CREATE TABLE balance (
+	CREATE TABLE IF NOT EXISTS balance (
 		uuid VARCHAR(255) PRIMARY KEY,
 		randid VARCHAR(255) NOT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -18,12 +20,12 @@ var createTableBalance = `
     );
 
     -- Indexes for better query performance
-    CREATE INDEX idx_accounts_organization_uuid ON balance (organization_uuid);
-    CREATE INDEX idx_accounts_external_id ON balance (external_id);
+    CREATE INDEX IF NOT EXISTS idx_accounts_organization_uuid ON balance (organization_uuid);
+    CREATE INDEX IF NOT EXISTS idx_accounts_external_id ON balance (external_id);
 `
 
-var createTableQuery = `
-		CREATE TABLE payment (
+var createTablePayment = `
+		CREATE TABLE IF NOT EXISTS payment (
 			-- Fields from Record
 			uuid VARCHAR(255) PRIMARY KEY,
 			randid VARCHAR(255) NOT NULL,
@@ -43,13 +45,13 @@ var createTableQuery = `
 		);
 		
 		-- Indexes for common queries
-		CREATE INDEX idx_payments_balance_uuid ON payment(balance_uuid);
-		CREATE INDEX idx_payments_created_at ON payment(created_at);
-		CREATE INDEX idx_payments_hash ON payment(hash);
+		CREATE INDEX IF NOT EXISTS idx_payments_balance_uuid ON payment(balance_uuid);
+		CREATE INDEX IF NOT EXISTS idx_payments_created_at ON payment(created_at);
+		CREATE INDEX IF NOT EXISTS idx_payments_hash ON payment(hash);
 `
 
 var createTableOrganization = `
-	CREATE TABLE organization (
+	CREATE TABLE IF NOT EXISTS organization (
 		uuid VARCHAR(255) PRIMARY KEY,
 		randid VARCHAR(255) NOT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT NOW(), 
@@ -62,7 +64,7 @@ var createTableOrganization = `
 `
 
 var createTableTransaction = `
-	CREATE TABLE transaction (
+	CREATE TABLE IF NOT EXISTS transaction (
 		uuid VARCHAR(255) PRIMARY KEY, 
 		randid VARCHAR(255) NOT NULL, 
 		created_at TIMESTAMP NOT NULL DEFAULT NOW(), 
@@ -73,7 +75,7 @@ var createTableTransaction = `
  	);`
 
 var createTableWithdraw = `
-	CREATE TABLE withdraw (
+	CREATE TABLE IF NOT EXISTS withdraw (
 		uuid VARCHAR(255) PRIMARY KEY, 
 		randid VARCHAR(255) NOT NULL, 
 		created_at TIMESTAMP NOT NULL DEFAULT NOW(), 
@@ -87,3 +89,32 @@ var createTableWithdraw = `
 		status VARCHAR(20) NOT NULL, 
 		hash VARCHAR(255) NOT NULL
 	);`
+
+func Migrate(writeDB sql.DB) error {
+	_, err := writeDB.Exec(createTableOrganization)
+	if err != nil {
+		return err
+	}
+
+	_, err = writeDB.Exec(createTableBalance)
+	if err != nil {
+		return err
+	}
+
+	_, err = writeDB.Exec(createTablePayment)
+	if err != nil {
+		return err
+	}
+
+	_, err = writeDB.Exec(createTableTransaction)
+	if err != nil {
+		return err
+	}
+
+	_, err = writeDB.Exec(createTableWithdraw)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
