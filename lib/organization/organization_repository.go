@@ -66,6 +66,10 @@ func (or *Repository) FindByUUID(uuid string) (*Organization, error) {
 func (or *Repository) FindBySlug(slug string) (*Organization, error) {
 	row, errScan := OrganizationRowScanner(or.findOrganizationBySlugStmt.QueryRow(slug))
 	if errScan != nil {
+		if errScan == sql.ErrNoRows {
+			return nil, OrganizationNotFound
+		}
+		
 		return nil, errScan
 	}
 

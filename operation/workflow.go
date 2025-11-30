@@ -32,13 +32,18 @@ func (ps *PaystoreClient) CreateOrganization(name, slug string) (*organization.O
 
 	// find if organization with the same slug already exists
 	// if exists, return it
+	isOrganizationExist := true
 	newOrganization, err := ps.organizationRepository.FindBySlug(newOrganization.Slug)
-	if err == nil && newOrganization != nil {
-		return newOrganization, nil
+	if err != nil {
+		if err == organization.OrganizationNotFound {
+			isOrganizationExist = false
+		} else {
+			return nil, err
+		}
 	}
 
-	if err != nil {
-		return nil, err
+	if isOrganizationExist {
+		return newOrganization, nil
 	}
 
 	newOrganization.Name = name
