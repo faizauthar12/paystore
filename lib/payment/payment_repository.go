@@ -42,10 +42,20 @@ func (br *Repository) Create(tx *sql.Tx, payment *Payment, balance *balance.Bala
 
 	createPaymentQuery := `
 		INSERT INTO payment (
-			uuid, randid, created_at, updated_at,
-			amount, balance_before_payment, balance_after_payment,
-			balance_uuid, organization_uuid, vendor_record_id, status, hash
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`
+			uuid,
+		    randid,
+		    created_at,
+		    updated_at,
+			amount,
+		    fees,
+		    balance_before_payment,
+		    balance_after_payment,
+			balance_uuid,
+		    organization_uuid,
+		    vendor_record_id,
+		    status,
+		    hash
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
 	_, err := tx.Exec(
 		createPaymentQuery,
 		payment.GetUUID(),
@@ -53,6 +63,7 @@ func (br *Repository) Create(tx *sql.Tx, payment *Payment, balance *balance.Bala
 		payment.GetCreatedAt(),
 		payment.GetUpdatedAt(),
 		payment.Amount,
+		payment.Fees,
 		payment.BalanceBeforePayment,
 		payment.BalanceAfterPayment,
 		payment.BalanceUUID,
