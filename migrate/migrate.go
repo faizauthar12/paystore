@@ -90,7 +90,7 @@ var createTableWithdraw = `
 		hash VARCHAR(255) NOT NULL
 	);`
 
-func Migrate(writeDB sql.DB) error {
+func Migrate(writeDB *sql.DB) error {
 	_, err := writeDB.Exec(createTableOrganization)
 	if err != nil {
 		return err
