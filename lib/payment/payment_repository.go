@@ -13,7 +13,7 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-var firstPartSelectQuery = `SELECT p.uuid, p.randid, p.created_at, p.updated_at, p.amount, p.balance_before_payment, p.balance_after_payment, p.balance_uuid, p.organization_uuid, p.hash`
+var firstPartSelectQuery = `SELECT p.uuid, p.randid, p.created_at, p.updated_at, p.amount, p.fees, p.balance_before_payment, p.balance_after_payment, p.balance_uuid, p.organization_uuid, p.vendor_record_id, p.status, p.hash`
 var findLatestPaymentQuery = firstPartSelectQuery + ` FROM payment p WHERE p.balance_uuid = $1 ORDER BY created_at DESC LIMIT 1;`
 var findPaymentByUUIDQuery = firstPartSelectQuery + ` FROM payment p WHERE p.uuid = $1;`
 
