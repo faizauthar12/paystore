@@ -130,6 +130,7 @@ func (p *Payment) ScanDestinations() []interface{} {
 		&p.CreatedAt,
 		&p.UpdatedAt,
 		&p.Amount,
+		&p.Fees,
 		&p.BalanceBeforePayment,
 		&p.BalanceAfterPayment,
 		&p.BalanceUUID,
